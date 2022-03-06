@@ -10,14 +10,18 @@
       href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
       .container {
         display: flex;
-        justify-content: center;
         font-size: 3em;
         height: 100vh;
+        justify-content: center;
         align-items: center;
       }
-      span {
+      .container span {
         margin: 0 10px;
       }
     </style>
@@ -35,15 +39,15 @@
       >
         E
       </span>
-
-      <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-      <script>
-        $('.animate__lightSpeedInRight').on('animationend', function () {
-          $('.animate__rotateIn')
-            .removeClass('animate__rotateIn')
-            .addClass('animate__hinge');
-        });
-      </script>
     </div>
+
+    <script>
+      const A = document.querySelector('.animate__rotateIn');
+      const E = document.querySelector('.animate__lightSpeedInRight');
+      E.addEventListener('animationend', function () {
+        A.classList.remove('animate__rotateIn');
+        A.classList.add('animate__hinge');
+      });
+    </script>
   </body>
 </html>
