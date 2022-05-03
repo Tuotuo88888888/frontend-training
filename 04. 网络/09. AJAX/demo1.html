@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const xhr = new XMLHttpRequest(); //创建发送请求的对象
+      xhr.onreadystatechange = function () {
+        //当请求状态发生改变时运行的函数
+        // xhr.readyState： 一个数字，用于判断请求到了哪个阶段
+        // 0: 刚刚创建好了请求对象，但还未配置请求（未调用open方法）
+        // 1: open方法已被调用
+        // 2: send方法已被调用
+        // 3: 正在接收服务器的响应消息体
+        // 4: 服务器响应的所有内容均已接收完毕
+        if (xhr.readyState === 4) {
+          // 服务器的响应结果已经全部接收完毕
+          const obj = JSON.parse(xhr.responseText);
+          console.log(obj);
+          for (const h of obj.data) {
+            const p = document.createElement('p');
+            p.innerHTML = h.cname;
+            document.body.appendChild(p);
+          }
+        }
+        // xhr.responseText： 获取服务器响应的消息体文本
+        // xhr.getResponseHeader("Content-Type") 获取响应头Content-Type
+      };
+
+      // 你们需要修改为：https://study.duyiedu.com
+      xhr.open('GET', 'http://localhost:7001/api/herolist'); //配置请求
+      xhr.setRequestHeader('abc', '1123'); //设置请求头
+      xhr.send(null); //构建请求体，发送到服务器，如果没有请求体，传递null
+
+      console.log(123);
+    </script>
+  </body>
+</html>

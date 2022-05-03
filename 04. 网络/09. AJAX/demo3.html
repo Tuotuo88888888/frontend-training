@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>
+      账号：
+      <input type="text" id="loginId" />
+    </p>
+    <p>
+      密码：
+      <input type="password" id="loginPwd" />
+    </p>
+    <p>
+      <button>登录</button>
+    </p>
+
+    <script>
+      async function login(loginId, loginPwd) {
+        const body = {
+          loginId,
+          loginPwd,
+        };
+        return await fetch('http://localhost:7001/api/user/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            test: '123',
+          },
+          body: JSON.stringify(body),
+        }).then((resp) => {
+          console.log(resp.headers.get('authorization'));
+          return resp.json();
+        });
+      }
+
+      const domLoginId = document.getElementById('loginId');
+      const domLoginPwd = document.getElementById('loginPwd');
+      const domLoginBtn = document.querySelector('button');
+
+      domLoginBtn.onclick = async function () {
+        const resp = await login(domLoginId.value, domLoginPwd.value);
+        if (resp.code === 0) {
+          alert('登录成功');
+        } else {
+          alert(resp.msg);
+        }
+      };
+    </script>
+  </body>
+</html>
