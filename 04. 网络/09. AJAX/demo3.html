@@ -9,45 +9,41 @@
   <body>
     <p>
       账号：
-      <input type="text" id="loginId" />
+      <input type="text" id="txtLoginId" />
     </p>
     <p>
       密码：
-      <input type="password" id="loginPwd" />
+      <input type="password" id="txtLoginPwd" />
     </p>
     <p>
       <button>登录</button>
     </p>
 
     <script>
-      async function login(loginId, loginPwd) {
-        const body = {
+      const btn = document.querySelector('button');
+      const txtLoginId = document.querySelector('#txtLoginId');
+      const txtLoginPwd = document.querySelector('#txtLoginPwd');
+
+      btn.onclick = async function () {
+        const loginId = txtLoginId.value,
+          loginPwd = txtLoginPwd.value;
+        const obj = {
           loginId,
           loginPwd,
         };
-        return await fetch('http://localhost:7001/api/user/login', {
+        const resp = await fetch('http://localhost:7001/api/user/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            test: '123',
+            a: 123,
           },
-          body: JSON.stringify(body),
-        }).then((resp) => {
-          console.log(resp.headers.get('authorization'));
-          return resp.json();
+          body: JSON.stringify(obj),
         });
-      }
-
-      const domLoginId = document.getElementById('loginId');
-      const domLoginPwd = document.getElementById('loginPwd');
-      const domLoginBtn = document.querySelector('button');
-
-      domLoginBtn.onclick = async function () {
-        const resp = await login(domLoginId.value, domLoginPwd.value);
-        if (resp.code === 0) {
-          alert('登录成功');
+        const body = await resp.json();
+        if (body.code) {
+          alert(body.msg);
         } else {
-          alert(resp.msg);
+          alert('登录成功');
         }
       };
     </script>

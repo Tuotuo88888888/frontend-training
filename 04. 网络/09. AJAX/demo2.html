@@ -7,19 +7,18 @@
     <title>Document</title>
   </head>
   <body>
-    <button>获取英雄数据</button>
+    <ul></ul>
     <script>
+      // fetch 返回的是一个Promise，当收到服务器的响应头之后，Promise完成
+      // 完成之后，会给予一个响应对象
       async function getHeroes() {
-        const resp = await fetch('http://localhost:7001/api/herolist').then(
-          (resp) => resp.json()
-        );
-        return resp;
+        const resp = await fetch('http://localhost:7001/api/herolist');
+        return await resp.json();
       }
 
-      document.querySelector('button').onclick = async function () {
-        const data = await getHeroes();
-        console.log(data);
-      };
+      getHeroes().then((resp) => {
+        console.log(resp);
+      });
     </script>
   </body>
 </html>
