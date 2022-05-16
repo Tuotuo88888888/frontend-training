@@ -156,7 +156,7 @@ localStorage.getItem('key');
 // 清除所有保存的内容
 localStorage.clear();
 // 根据键，清除指定的内容
-localSotrage.removetItem('key');
+localStorage.removeItem('key');
 
 // 保存一个键值对到本地，值必须是字符串
 sessionStorage.setItem('key', 'value');
@@ -165,7 +165,7 @@ sessionStorage.getItem('key');
 // 清除所有保存的内容
 sessionStorage.clear();
 // 根据键，清除指定的内容
-sessionStorage.removetItem('key');
+sessionStorage.removeItem('key');
 ```
 
 无论是`localStorage`还是`sessionStorage`，它们都只能保存字符串，如果需要保存对象或数组，可以先将对象和数组转换为`JSON`字符串再进行保存
