@@ -120,4 +120,11 @@
     scrollBottom();
   }
   window.sendChat = sendChat;
+
+  // 下面的代码是退出登录的代码，课堂上忘讲了，很简单，看看注释就行
+  // 给关闭的div注册点击事件
+  doms.close.onclick = function () {
+    API.loginOut(); // 退出登录
+    location.href = './login.html'; // 跳转到登录页
+  };
 })();
