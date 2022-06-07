@@ -11,7 +11,7 @@ module.exports = {
     filename: 'js/app-[contenthash:5].js',
     assetModuleFilename: 'assets/[hash:5][ext]',
     chunkFilename: 'js/chunk-[contenthash:5].js',
-    publicPath: '/',
+    publicPath: './',
   },
   target: 'web',
   devtool: 'source-map',
