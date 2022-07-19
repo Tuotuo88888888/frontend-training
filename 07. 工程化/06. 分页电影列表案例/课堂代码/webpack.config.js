@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
   mode: 'development',
@@ -11,12 +10,14 @@ module.exports = {
     filename: 'js/app-[contenthash:5].js',
     assetModuleFilename: 'assets/[hash:5][ext]',
     chunkFilename: 'js/chunk-[contenthash:5].js',
-    publicPath: './',
+    // publicPath: './',
+    clean: true,
   },
   target: 'web',
   devtool: 'source-map',
   devServer: {
     port: 8080,
+    // static: './dist',
     proxy: {
       '/api': {
         // 当请求地址以 api 开头时，代理到另一个地址
@@ -69,7 +70,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'css/[name]-[contenthash:5].css',
     }),
-    new CleanWebpackPlugin(),
     new CopyPlugin({
       // 应用 复制文件 插件
       patterns: [
