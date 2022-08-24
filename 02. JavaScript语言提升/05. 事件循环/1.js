@@ -1,10 +1,15 @@
-setTimeout(() => {
+// // 死循环指定的时间
+// function delay(duration) {
+//   var start = Date.now();
+//   while (Date.now() - start < duration) {}
+// }
+
+setTimeout(function () {
   console.log(1);
-}, 1000);
-console.log(2);
+}, 0);
 
-dom.onclick = function () {
-  console.log(3);
-};
+Promise.resolve().then(function () {
+  console.log(2);
+});
 
-console.log(4);
+console.log(3);
