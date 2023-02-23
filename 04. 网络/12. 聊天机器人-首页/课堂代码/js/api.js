@@ -1,5 +1,5 @@
 var API = (function () {
-  const BASE_URL = 'http://localhost:7001';
+  const BASE_URL = 'https://study.duyiedu.com';
   const TOKEN_KEY = 'token';
 
   function get(path) {
