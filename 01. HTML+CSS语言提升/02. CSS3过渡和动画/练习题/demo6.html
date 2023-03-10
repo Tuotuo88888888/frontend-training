@@ -19,6 +19,31 @@
     </style>
     <style>
       /* 在这里完成作业 */
+      .dot {
+        border-radius: 4px;
+        animation: dot 0.5s infinite ease-in-out alternate;
+      }
+      .dot1 {
+        animation-delay: 200ms;
+      }
+      .dot2 {
+        animation-delay: 400ms;
+      }
+      .dot3 {
+        animation-delay: 600ms;
+      }
+      .dot4 {
+        animation-delay: 800ms;
+      }
+      .dot5 {
+        animation-delay: 1000ms;
+      }
+      @keyframes dot {
+        100% {
+          background-color: lightskyblue;
+          transform: scaleY(1.5);
+        }
+      }
     </style>
   </head>
   <body>

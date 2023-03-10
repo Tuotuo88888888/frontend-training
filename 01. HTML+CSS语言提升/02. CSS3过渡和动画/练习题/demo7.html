@@ -12,12 +12,24 @@
       .bell {
         width: 59px;
         height: 107px;
-        background: url(./bell.png);
+        background: url(./效果/bell.png);
         margin: 0 auto;
       }
     </style>
     <style>
       /* 在这里完成作业 */
+      .bell {
+        transform-origin: center top;
+        animation: bell 1s ease-in-out infinite alternate;
+      }
+      @keyframes bell {
+        from {
+          transform: rotate(45deg);
+        }
+        to {
+          transform: rotate(-45deg);
+        }
+      }
     </style>
   </head>
   <body>

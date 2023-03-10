@@ -42,6 +42,17 @@
     </style>
     <style>
       /* 在这里完成作业 */
+      .menu-container {
+        border-radius: 5px;
+      }
+      .sub-menu {
+        height: 0;
+        transition: 0.5s;
+        overflow: hidden;
+      }
+      .menu.active .sub-menu {
+        height: 150px;
+      }
     </style>
   </head>
   <body>
@@ -89,4 +100,16 @@
       </div>
     </div>
   </body>
+  <script>
+    var menus = document.querySelectorAll(".menu");
+    menus.forEach(function (menu) {
+      menu.querySelector("h2").onclick = function () {
+        var activeMenu = document.querySelector(".menu.active");
+        if (activeMenu) {
+          activeMenu.classList.remove("active");
+        }
+        if (activeMenu !== menu) menu.classList.add("active");
+      };
+    });
+  </script>
 </html>

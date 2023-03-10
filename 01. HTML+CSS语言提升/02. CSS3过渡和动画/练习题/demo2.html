@@ -21,6 +21,10 @@
     </style>
     <style>
       /* 在这里完成作业 */
+      .box {
+        border-radius: 50%;
+        transition: all 0.5s ease;
+      }
     </style>
   </head>
   <body>
@@ -28,4 +32,22 @@
     <p>在屏幕上点击任意位置试一试</p>
     <p>此效果需要用到JS</p>
   </body>
+  <script>
+    var box = document.querySelector("#ball");
+    // document.addEventListener("mousedown", function () {
+    //   var halfWidth = box.offsetWidth / 2;
+    //   var halfHeight = box.offsetHeight / 2;
+    //   document.addEventListener("mouseup", function (e) {
+    //     box.style.left = e.clientX - halfWidth + "px";
+    //     box.style.top = e.clientY - halfHeight + "px";
+    //   });
+    // });
+    var halfWidth = box.offsetWidth / 2;
+    var halfHeight = box.offsetHeight / 2;
+    window.addEventListener("click", function (e) {
+      box.style.transform = `translate(${e.clientX - halfWidth}px,${
+        e.clientY - halfHeight
+      }px)`;
+    });
+  </script>
 </html>
