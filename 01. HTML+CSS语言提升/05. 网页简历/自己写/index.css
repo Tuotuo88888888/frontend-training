@@ -109,7 +109,7 @@ html {
   display: flex;
   flex-direction: column;
   gap: 22px;
-  justify-content: space-around;
+  justify-content: space-between;
   border-left: 2px solid #22d3ee;
   position: relative;
 }
@@ -135,13 +135,13 @@ html {
 }
 
 .bodyer .box .skill-box-content {
-  padding: 10px 0 20px;
+  padding: 10px 0 30px;
   display: grid;
   gap: 30px 0;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
 }
-.bodyer .box .skill-box-content .skill-item {
+.bodyer .box .skill-box-content .item {
   width: 130px;
   height: 130px;
   border-radius: 50%;
@@ -149,32 +149,58 @@ html {
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 0;
+  border: 5px solid #c3f1f8;
+  background-color: #f0fdff;
 }
-.bodyer .box .skill-box-content .skill-item::before {
+.bodyer .box .skill-box-content .item::before {
   content: "";
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   border-radius: 50%;
-  background-color: #c3f1f8;
-  z-index: -2;
+  border: 5px solid transparent;
+  margin: -5px;
   position: absolute;
+  transform: rotate(45deg);
 }
-.bodyer .box .skill-box-content .skill-item::after {
-  content: "";
-  top: 5px;
-  bottom: 5px;
-  left: 5px;
-  right: 5px;
-  border-radius: 50%;
-  background-color: #f0fdff;
-  z-index: -1;
-  position: absolute;
+.bodyer .box .skill-box-content .item:nth-child(1):before {
+  border-top-color: #0ea5e9;
+}
+.bodyer .box .skill-box-content .item:nth-child(2):before {
+  border-top-color: #0ea5e9;
+  border-right-color: #0ea5e9;
+}
+.bodyer .box .skill-box-content .item:nth-child(3):before {
+  border-color: #0ea5e9;
+  border-left-color: transparent;
+}
+.bodyer .box .skill-box-content .item:nth-child(4):before {
+  border-color: #0ea5e9;
+}
+.bodyer .box .skill-box-content .item:nth-child(5):before {
+  border-top-color: #0ea5e9;
+  border-right-color: #0ea5e9;
+}
+.bodyer .box .skill-box-content .item:nth-child(6):before {
+  border-color: #0ea5e9;
 }
 
-.bodyer .box .skill-box-content .skill-item:nth-child(0):before {
-  background: linear-gradient(105deg, rgb(0, 0, 0), #c3f1f8 50%),
-    linear-gradient(43deg, rgb(0, 0, 0) 50%, rgb(255, 255, 255) 50%);
+.bodyer .box .project-box-content {
+  padding: 10px 0 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  justify-content: space-between;
+}
+
+.bodyer .box .project-box-content .item {
+  display: flex;
+  flex-direction: column;
+  gap: 0 10px;
+}
+.bodyer .box .project-box-content .item .project-item {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 10px;
 }
