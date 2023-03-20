@@ -12,6 +12,8 @@
         justify-content: center;
       }
       .menu li {
+        user-select: none;
+        cursor: pointer;
         margin: 0 10px;
         cursor: pointer;
       }
@@ -30,6 +32,17 @@
     </ul>
     <script>
       // 点击li时，切换active到被点击的li上
+      var lis = document.querySelectorAll(".menu li");
+      lis.forEach(function (li) {
+        li.addEventListener("click", function () {
+          var activeLi = document.querySelector(".menu li.active");
+          if (activeLi === li) {
+            return;
+          }
+          activeLi.classList.remove("active");
+          li.classList.add("active");
+        });
+      });
     </script>
   </body>
 </html>

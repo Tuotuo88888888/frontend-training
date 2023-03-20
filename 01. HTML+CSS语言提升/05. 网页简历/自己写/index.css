@@ -161,25 +161,18 @@ html {
   position: absolute;
   transform: rotate(45deg);
 }
-.bodyer .box .skill-box-content .item:nth-child(1):before {
+.bodyer .box .skill-box-content .item.level1::before {
   border-top-color: #0ea5e9;
 }
-.bodyer .box .skill-box-content .item:nth-child(2):before {
+.bodyer .box .skill-box-content .item.level2::before {
   border-top-color: #0ea5e9;
   border-right-color: #0ea5e9;
 }
-.bodyer .box .skill-box-content .item:nth-child(3):before {
+.bodyer .box .skill-box-content .item.level3::before {
   border-color: #0ea5e9;
   border-left-color: transparent;
 }
-.bodyer .box .skill-box-content .item:nth-child(4):before {
-  border-color: #0ea5e9;
-}
-.bodyer .box .skill-box-content .item:nth-child(5):before {
-  border-top-color: #0ea5e9;
-  border-right-color: #0ea5e9;
-}
-.bodyer .box .skill-box-content .item:nth-child(6):before {
+.bodyer .box .skill-box-content .item.level4::before {
   border-color: #0ea5e9;
 }
 
