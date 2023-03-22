@@ -14,7 +14,7 @@
       // 调用该函数，会远程加载省份数据
       // 函数返回一个Promise，成功后得到省份数组，失败时会给予失败原因
       function getProvinces() {
-        return fetch('https://study.duyiedu.com/api/citylist')
+        return fetch("https://study.duyiedu.com/api/citylist")
           .then((resp) => resp.json())
           .then((resp) => resp.data)
           .then((resp) =>
@@ -23,6 +23,17 @@
       }
 
       // 利用getProvinces函数，将省份数据加载到select元素中
+      getProvinces().then(
+        (resp) => {
+          const select = document.querySelector("#selProvince");
+          select.innerHTML = resp
+            .map((i) => `<option value="${i.value}">${i.label}</option>`)
+            .join("");
+        },
+        (err) => {
+          console.log(err.message);
+        }
+      );
     </script>
   </body>
 </html>
