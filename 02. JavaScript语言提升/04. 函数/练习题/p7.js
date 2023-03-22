@@ -4,12 +4,32 @@
 
 // 根据下面的调用方式，编写debounce函数
 
+const debounce = (fn, delay = 1000) => {
+  let tempId;
+  return (...args) => {
+    clearTimeout(tempId);
+    tempId = setTimeout(() => fn(...args), delay);
+  };
+};
 const fn = (a, b) => {
   console.log(a + b);
 };
 
 const dFn = debounce(fn, 1000); // 产生一个防抖函数，延迟1000毫秒执行fn
-dFn(1, 2); // 延迟输出：3
-dFn(2, 3); // 延迟输出：5
+// dFn(1, 2); // 延迟输出：3
+// dFn(2, 3); // 延迟输出：5
 
 // 最终，1秒后输出：5
+
+// function showCount() {
+//   console.log(this);
+// }
+
+// const dShowCount = debounce(showCount, 1000);
+
+// var counter = {
+//   count: 0,
+//   dShowCount,
+// };
+// counter.dShowCount();
+// counter.dShowCount();
