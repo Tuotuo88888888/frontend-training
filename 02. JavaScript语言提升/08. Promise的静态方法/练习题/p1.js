@@ -22,9 +22,55 @@ function fetchStudents(page) {
 // 利用 fetchStudents 函数，完成下面的练习
 
 // 获取1-10页的学生，最终按照页码的顺序合并成一个数组，任何一页的数据获取出现错误，则任务不再继续，打印错误消息
+var allStudent = [];
+for (let i = 1; i <= 10; i++) {
+  allStudent.push(fetchStudents(i));
+}
+Promise.all(allStudent).then(
+  // (arr) => console.log(Array.prototype.concat.call([], ...arr)),
+  (arr) => console.log(arr.flat()),
+  (err) => console.log(err.message)
+);
 
 // 获取1-10页的学生，最终按照页码的顺序合并成一个数组，如果某些页码的数据获取失败，就不加入该数据即可
+// var allStudent = [];
+// for (let i = 1; i <= 10; i++) {
+//   allStudent.push(fetchStudents(i));
+// }
+// Promise.allSettled(allStudent).then((results) => {
+//   const allData = [];
+//   results.forEach((result) => {
+//     if (result.status === "fulfilled") {
+//       allData.push(...result.value);
+//     }
+//   });
+//   console.log(allData);
+// });
 
 // 获取1-10页的学生，打印最先获取到的数据，如果全部都获取失败，则打印所有的错误消息
+// var allStudent = [];
+// for (let i = 1; i <= 10; i++) {
+//   allStudent.push(fetchStudents(i));
+// }
+// Promise.any(allStudent).then(
+//   (res) => {
+//     console.log(res);
+//   },
+//   (aErr) => {
+//     aErr.errors.forEach((err) => console.log(err.message));
+//   }
+// );
 
 // 获取1-10页的学生，输出最先得到的结果（有结果输出结果，有错误输出错误）
+// var allStudent = [];
+// for (let i = 1; i <= 10; i++) {
+//   allStudent.push(fetchStudents(i));
+// }
+// Promise.race(allStudent).then(
+//   (res) => {
+//     console.log(res);
+//   },
+//   (err) => {
+//     console.log(err.message);
+//   }
+// );
