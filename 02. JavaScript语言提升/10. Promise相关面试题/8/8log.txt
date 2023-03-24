@@ -1,0 +1,8 @@
+promise1
+undefined
+end
+promise2
+promise3
+promise4
+promise{padding}
+after1

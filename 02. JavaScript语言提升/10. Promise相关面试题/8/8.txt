@@ -1,0 +1,19 @@
+global
+    a=undefined;
+    
+
+
+
+
+
+
+
+timeQueue
+    1s resolve
+
+
+
+
+
+queue
+    promise2 promise3 promise4

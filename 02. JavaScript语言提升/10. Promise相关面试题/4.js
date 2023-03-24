@@ -2,6 +2,7 @@ async function m() {
   console.log(0);
   const n = await 1;
   console.log(n);
+  return 3;
 }
 
 // function m() {
@@ -10,5 +11,5 @@ async function m() {
 //   });
 // }
 
-m();
+console.log(m());
 console.log(2);
