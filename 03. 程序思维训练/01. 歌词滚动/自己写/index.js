@@ -9,43 +9,55 @@ async function getLrc() {
 }
 
 (function () {
-  const audio = document.querySelector("audio");
-  const ul = document.querySelector(".box ul");
+  const dom = {
+    box: document.querySelector(".container .box"),
+    audio: document.querySelector("audio"),
+    ul: document.querySelector(".box ul"),
+  };
+
   function main() {
     bindEvents();
   }
   function bindEvents() {
-    audio.addEventListener("loadeddata", audioLoad);
+    dom.audio.addEventListener("loadeddata", audioLoad);
   }
   async function audioLoad() {
-    ul.innerHTML = "";
+    dom.ul.innerHTML = "";
     try {
       const data = await getLrc();
       const lineData = data.split("\n");
       const arr = lineData.slice(1).map((i) => {
         const line = i.split("]");
         const lineLeft = line[0].substring(1).split(/:|\./);
-        const second =
-          lineLeft[0] * 60 * 1000 + lineLeft[1] * 1000 + +lineLeft[2];
+        const second = lineLeft[0] * 60 + +lineLeft[1] + lineLeft[2] / 1000;
         const word = line[1];
         return { second, word };
       });
-      ul.innerHTML = arr.map((i) => `<li>${i.word}</li>`).join("\n");
+      dom.ul.innerHTML = arr.map((i) => `<li>${i.word}</li>`).join("\n");
       const secondArr = arr.map((i) => i.second);
-      audio.addEventListener("timeupdate", function ({ timeStamp }) {
-        console.log(timeStamp);
+      const boxClientHeight = dom.box.clientHeight;
+      const liHeight = dom.ul.children[0].offsetHeight;
+      dom.audio.addEventListener("timeupdate", function (e) {
+        const { currentTime } = dom.audio;
         const curIndex = secondArr.findIndex(
-          (e, i, arr) => timeStamp > e && timeStamp < arr[i + 1]
+          (e, i, arr) => currentTime > e && currentTime < arr[i + 1]
         );
-        const activeLi = ul.querySelector(".active");
+        const activeLi = dom.ul.querySelector(".active");
         if (activeLi) {
           activeLi.className = "";
         }
-        ul.children[curIndex].className = "active";
-        ul.style.marginTop = `-${curIndex * 30}px`;
+        const currentLi = dom.ul.children[curIndex];
+        if (currentLi) {
+          currentLi.className = "active";
+        }
+        let y = curIndex * liHeight - (boxClientHeight / 2 - liHeight / 2);
+        if (y < 0) {
+          y = 0;
+        }
+        dom.ul.style.transform = `translateY(-${y}px)`;
       });
     } catch (e) {
-      ul.innerHTML = `<li class="active">${e.message}</li>`;
+      dom.ul.innerHTML = `<li class="active">${e.message}</li>`;
     }
   }
   main();

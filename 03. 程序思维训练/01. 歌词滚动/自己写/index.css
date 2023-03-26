@@ -26,6 +26,7 @@ body {
 }
 .box ul {
   width: 100%;
+  transition: 0.2s;
 }
 .box ul li {
   color: #666;
