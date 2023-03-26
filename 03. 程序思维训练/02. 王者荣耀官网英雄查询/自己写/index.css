@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+body {
+  height: 2000px;
+  background-color: #ecedf2;
+}
+
+.container {
+  width: 1140px;
+  margin: 0 auto;
+}
+.top {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  position: relative;
+  margin-bottom: 30px;
+}
+.nav {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  overflow: hidden;
+}
+.nav > li {
+  display: grid;
+  grid-template-columns: 80px auto;
+}
+.nav .navTitle {
+  line-height: 50px;
+  text-align: center;
+  background-color: #5488d5;
+  color: white;
+  font-weight: 400;
+}
+.subnav {
+  display: flex;
+  align-items: center;
+  gap: 0 30px;
+  padding-left: 20px;
+}
+.subnav input[type="radio"] {
+  box-sizing: content-box;
+  vertical-align: -5.3px;
+  width: 20px;
+  height: 20px;
+  appearance: none;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 1px solid #d0d0d0;
+  position: relative;
+  transition: 0.3s;
+  margin-right: 4px;
+}
+.subnav input[type="radio"]:active {
+  border-color: #5488d5;
+}
+.subnav input[type="radio"]::before {
+  transition: 0.3s;
+  transform-origin: center center;
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  border-radius: 50%;
+  background-color: #5488d5;
+}
+.subnav input[type="radio"]:checked::before {
+  width: 72%;
+  height: 72%;
+}
+.subnav label {
+  font-size: 14px;
+  color: #666666;
+  cursor: pointer;
+}
+.searchBox {
+  position: absolute;
+  right: 30px;
+  bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  height: 40px;
+  width: 300px;
+  display: flex;
+}
+.searchBox .search {
+  padding-left: 12px;
+  height: 100%;
+  font-size: 12px;
+  border: none;
+  background-color: transparent;
+  flex: 1;
+}
+.searchBox .searchBtn {
+  width: 40px;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  font-size: 0;
+  background-image: url(../王者荣耀官网英雄查询-素材/search_icon.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: relative;
+}
+.searchBox .searchBtn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #cccccc;
+  width: 1px;
+  height: 20px;
+}
+
+.heroList {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  justify-items: center;
+  text-align: center;
+  font-size: 14px;
+  row-gap: 20px;
+  color: #333;
+}
+.heroList a img {
+  width: 77px;
+  height: 77px;
+  display: block;
+  margin-bottom: 5px;
+  border: 2px solid #5f89cf;
+  border-radius: 10px 0 10px 0;
+}
