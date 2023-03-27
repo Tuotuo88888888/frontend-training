@@ -11,6 +11,7 @@ async function getHeroes() {
 const doms = {
   nav: document.querySelector(".nav"),
   heroList: document.querySelector(".heroList"),
+  search: document.querySelector(".search"),
 };
 const datas = {
   heroList: [],
@@ -83,11 +84,17 @@ function initPage() {
     .join("\n");
 }
 function bindEvents() {
-  doms.nav.addEventListener("change", function ({ target }) {
-    console.log(target);
-    if (target.nodeName === "INPUT" && target.name === "nav") {
-      showHeroByType(target.dataset.type, target.dataset.typeIndex);
-    }
+  doms.nav.addEventListener(
+    "change",
+    function ({ target }) {
+      if (target.nodeName === "INPUT" && target.name === "nav") {
+        showHeroByType(target.dataset.type, target.dataset.typeIndex);
+      }
+    },
+    true
+  );
+  doms.search.addEventListener("input", function () {
+    showHeroBySearch(this.value);
   });
 }
 function showHeroByType(type, typeIndex) {
@@ -97,10 +104,18 @@ function showHeroByType(type, typeIndex) {
       .find((i) => i.key === type && i.getFilterFn)
       ?.getFilterFn(typeIndex) ?? ((hero) => hero[type] == typeIndex);
 
-  doms.heroList.innerHTML = datas.heroList
-    .filter(filterFn)
+  shwoHeroList(datas.heroList.filter(filterFn));
+}
+function showHeroBySearch(search) {
+  shwoHeroList(
+    datas.heroList.filter((h) => h.cname.includes(search)),
+    search
+  );
+}
+function shwoHeroList(heroList, keyword = null) {
+  doms.heroList.innerHTML = heroList
     .map(
-      ({ ename, title }) => `
+      ({ ename, cname }) => `
     <a
       class="hero"
       href="https://pvp.qq.com/web201605/herodetail/${ename}.shtml"
@@ -110,19 +125,17 @@ function showHeroByType(type, typeIndex) {
         src="https://game.gtimg.cn/images/yxzj/img201606/heroimg/${ename}/${ename}.jpg"
         alt=""
       />
-      <span>${title}</span>
+      <span>${cname.replace(keyword, (s) => `<em>${s}</em>`)}</span>
     </a>
   `
     )
     .join("");
 }
 function mounted() {
-  document.querySelector(".hero_type_all").checked = true;
-  document.querySelector(".hero_type_all").addEventListener("change", () => {});
-  document.querySelector(".hero_type_all").dispatchEvent(new Event("change"), {
+  const heroAll = document.querySelector(".hero_type_all");
+  heroAll.checked = true;
+  heroAll.dispatchEvent(new Event("change"), {
     bubbles: true,
-    cancelable: true,
-    composed: true,
   });
 }
 

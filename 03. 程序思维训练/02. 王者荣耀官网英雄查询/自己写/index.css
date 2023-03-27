@@ -147,3 +147,8 @@ body {
   border: 2px solid #5f89cf;
   border-radius: 10px 0 10px 0;
 }
+.hero em {
+  color: red;
+  font-weight: 400;
+  font-style: normal;
+}
