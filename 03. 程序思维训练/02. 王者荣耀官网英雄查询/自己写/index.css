@@ -12,16 +12,14 @@ a {
   color: inherit;
 }
 body {
-  height: 2000px;
   background-color: #ecedf2;
 }
 
 .container {
   width: 1140px;
-  margin: 0 auto;
+  margin: 1em auto;
 }
 .top {
-  margin-top: 16px;
   display: flex;
   justify-content: space-between;
   background-color: white;
@@ -60,7 +58,7 @@ body {
   border-radius: 50%;
   border: 1px solid #d0d0d0;
   position: relative;
-  transition: 0.3s;
+  transition: border-color 0.3s;
   margin-right: 4px;
 }
 .subnav input[type="radio"]:active {
@@ -71,8 +69,8 @@ body {
   transform-origin: center center;
   content: "";
   position: absolute;
-  width: 0;
-  height: 0;
+  width: 14px;
+  height: 14px;
   top: 0;
   left: 0;
   bottom: 0;
@@ -80,10 +78,10 @@ body {
   margin: auto;
   border-radius: 50%;
   background-color: #5488d5;
+  transform: scale(0);
 }
 .subnav input[type="radio"]:checked::before {
-  width: 72%;
-  height: 72%;
+  transform: scale(1);
 }
 .subnav label {
   font-size: 14px;

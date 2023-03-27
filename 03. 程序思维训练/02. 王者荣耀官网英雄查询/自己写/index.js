@@ -12,6 +12,7 @@ const doms = {
   nav: document.querySelector(".nav"),
   heroList: document.querySelector(".heroList"),
   search: document.querySelector(".search"),
+  heroAll: null,
 };
 const datas = {
   heroList: [],
@@ -111,6 +112,7 @@ function showHeroBySearch(search) {
     datas.heroList.filter((h) => h.cname.includes(search)),
     search
   );
+  doms.heroAll.checked = true;
 }
 function shwoHeroList(heroList, keyword = null) {
   doms.heroList.innerHTML = heroList
@@ -132,9 +134,9 @@ function shwoHeroList(heroList, keyword = null) {
     .join("");
 }
 function mounted() {
-  const heroAll = document.querySelector(".hero_type_all");
-  heroAll.checked = true;
-  heroAll.dispatchEvent(new Event("change"), {
+  doms.heroAll = document.querySelector(".hero_type_all");
+  doms.heroAll.checked = true;
+  doms.heroAll.dispatchEvent(new Event("change"), {
     bubbles: true,
   });
 }
