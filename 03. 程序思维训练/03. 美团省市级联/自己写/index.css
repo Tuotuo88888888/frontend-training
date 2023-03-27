@@ -12,26 +12,30 @@ li {
 }
 .select {
   color: #666666;
-  border-radius: 5px;
-  border: 1px solid #cccccc;
   width: 150px;
   height: 40px;
   line-height: 40px;
   position: relative;
-  padding: 0 10px;
+}
+.select .display {
+  width: 100%;
+  height: 100%;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
+  padding: 0 10px;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
 }
-.select .iconfont.iconarrow-up {
+.select .display .iconfont.iconarrow-up {
   font-size: 12px;
   transition: 0.25s;
   transform-origin: center center;
 }
-.select.show .iconfont.iconarrow-up {
+.select.show .display .iconfont.iconarrow-up {
   transform: rotate(180deg);
 }
-.select > label {
+.select .display label {
   font-size: 14px;
   cursor: inherit;
 }
