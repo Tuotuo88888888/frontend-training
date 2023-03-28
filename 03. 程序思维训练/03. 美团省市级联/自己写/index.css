@@ -9,6 +9,8 @@ li {
 
 .container {
   margin: 8px 13px;
+  display: flex;
+  gap: 20px;
 }
 .select {
   color: #666666;
@@ -16,6 +18,10 @@ li {
   height: 40px;
   line-height: 40px;
   position: relative;
+}
+.select.disabled .display {
+  cursor: not-allowed;
+  color: #ccc;
 }
 .select .display {
   width: 100%;

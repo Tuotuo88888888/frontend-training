@@ -30,50 +30,84 @@ async function initData() {
 }
 function initPage() {
   doms.container.innerHTML = "";
-  doms.container.appendChild(
-    selectToHTML(datas.selectData, { label: "请选择省份" })
-  );
+  const sf = selectToHTML(datas.selectData, { label: "请选择省份" });
+  const cs = selectToHTML([], { label: "请选择城市" });
+  const dq = selectToHTML([], { label: "请选择地区" });
+  sf.onchange = function (val) {
+    const csItems = datas.selectData.find((i) => i.value === val)?.children;
+    cs.updataItems(csItems);
+    dq.updataItems([]);
+
+    cs.onchange = function (val) {
+      const dqItems = csItems.find((i) => i.value === val)?.children;
+      dq.updataItems(dqItems);
+    };
+  };
+  doms.container.append(sf, cs, dq);
 }
 function bindEvents() {}
 function selectToHTML(
   data,
-  { label = "请选择", defaultValue = "", change = null } = {}
+  { label = "请选择", defaultValue = "", change = null, lock = true } = {}
 ) {
-  const showLabel = label;
-  const defaultItem = data.find((i) => i.value === defaultValue);
-  defaultItem && (showLabel = defaultItem.label);
-
   const select = document.createElement("div");
   select.className = "select";
-  select.dataset.value = defaultValue;
   select.innerHTML = `<div class="display">
-    <label>${showLabel}</label>
+    <label></label>
     <i class="iconfont iconarrow-up"></i>
   </div>
   <ul class="list">
-  ${data
-    .map((option) => `<li data-value="${option.value}">${option.label}</li>`)
-    .join("\n")}
   </ul>`;
 
   const displayDom = select.querySelector(".display");
   const listDom = select.querySelector(".list");
   const labelDom = displayDom.querySelector("label");
+
+  _updataItems(data);
+  _setSelected(defaultValue);
   function _toggleShow() {
-    select.classList.toggle("show");
+    if (!select.classList.contains("disabled")) {
+      const showSelect = doms.container.querySelector(".select.show");
+      showSelect &&
+        showSelect !== select &&
+        showSelect.classList.remove("show");
+      select.classList.toggle("show");
+    }
+  }
+  function _updataItems(arr, val) {
+    data = arr;
+    if (arr.length === 0) {
+      select.classList.add("disabled");
+    } else {
+      select.classList.remove("disabled");
+    }
+    listDom.innerHTML = arr
+      .map((option) => `<li data-value="${option.value}">${option.label}</li>`)
+      .join("\n");
+    _setSelected(val);
+  }
+  function _setSelected(val) {
+    select.dataset.value = val;
+    labelDom.innerText = data.find((i) => i.value === val)?.label ?? label;
+    _setActive(val);
+  }
+  function _setActive(val) {
+    const activeLi = listDom.querySelector(".active");
+    activeLi && activeLi.classList.remove("active");
+    Array.from(listDom.children)
+      .find((i) => i.dataset.value === val)
+      ?.classList.add("active");
   }
   displayDom.addEventListener("click", _toggleShow);
   listDom.addEventListener("click", function ({ target }) {
     if (target.nodeName === "LI") {
-      const activeLi = this.querySelector(".active");
-      activeLi && activeLi.classList.remove("active");
-      target.classList.add("active");
-      labelDom.innerText = target.innerText;
-      select.dataset.value = target.dataset.value;
+      const val = target.dataset.value;
+      _setSelected(val);
       _toggleShow();
-      change && change(target.dataset.value);
+      select.onchange && select.onchange(val);
     }
   });
+  select.updataItems = _updataItems;
 
   return select;
 }
