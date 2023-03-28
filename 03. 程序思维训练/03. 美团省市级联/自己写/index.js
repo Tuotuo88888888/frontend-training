@@ -65,16 +65,16 @@ function selectToHTML(
 
   _updataItems(data);
   _setSelected(defaultValue);
-  function _toggleShow() {
+  function _toggle() {
     if (!select.classList.contains("disabled")) {
-      const showSelect = doms.container.querySelector(".select.show");
-      showSelect &&
-        showSelect !== select &&
-        showSelect.classList.remove("show");
-      select.classList.toggle("show");
+      const expandSelect = doms.container.querySelector(".select.expand");
+      expandSelect &&
+        expandSelect !== select &&
+        expandSelect.classList.remove("expand");
+      select.classList.toggle("expand");
     }
   }
-  function _updataItems(arr, val) {
+  function _updataItems(arr = [], val) {
     data = arr;
     if (arr.length === 0) {
       select.classList.add("disabled");
@@ -87,9 +87,9 @@ function selectToHTML(
     _setSelected(val);
   }
   function _setSelected(val) {
+    _setActive(val);
     select.dataset.value = val;
     labelDom.innerText = data.find((i) => i.value === val)?.label ?? label;
-    _setActive(val);
   }
   function _setActive(val) {
     const activeLi = listDom.querySelector(".active");
@@ -98,12 +98,12 @@ function selectToHTML(
       .find((i) => i.dataset.value === val)
       ?.classList.add("active");
   }
-  displayDom.addEventListener("click", _toggleShow);
+  displayDom.addEventListener("click", _toggle);
   listDom.addEventListener("click", function ({ target }) {
     if (target.nodeName === "LI") {
       const val = target.dataset.value;
       _setSelected(val);
-      _toggleShow();
+      _toggle();
       select.onchange && select.onchange(val);
     }
   });
