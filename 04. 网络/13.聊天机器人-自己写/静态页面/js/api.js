@@ -29,63 +29,41 @@ const api = {
   },
 };
 async function reg(userInfo) {
-  try {
-    const res = await api.post("/api/user/reg", userInfo);
-    const data = await res.json();
-    console.log(data);
-  } catch (e) {
-    console.log(e);
-  }
+  const res = await api.post("/api/user/reg", userInfo);
+  const data = await res.json();
+  return data;
 }
 
 async function login(loginInfo) {
-  try {
-    const res = await api.post("/api/user/login", loginInfo);
-    const data = await res.json();
-    if (data.code === 0) {
-      setToken(res.headers.get("authorization"));
-    }
-  } catch (e) {
-    console.log(e);
+  const res = await api.post("/api/user/login", loginInfo);
+  const data = await res.json();
+  if (data.code === 0) {
+    setToken(res.headers.get("authorization"));
+    return true;
   }
+  return false;
 }
 
 async function exists(loginId) {
-  try {
-    const res = await api.get("/api/user/exists", loginId);
-    const data = await res.json();
-    console.log(data);
-  } catch (e) {
-    console.log(e);
-  }
+  const res = await api.get("/api/user/exists", loginId);
+  const data = await res.json();
+  return data;
 }
 
 async function profile() {
-  try {
-    const res = await api.get("/api/user/profile");
-    const data = await res.json();
-    console.log(data);
-  } catch (e) {
-    console.log(e);
-  }
+  const res = await api.get("/api/user/profile");
+  const data = await res.json();
+  return data;
 }
 
 async function sendChat(content) {
-  try {
-    const res = await api.post("/api/chat", { content });
-    const data = await res.json();
-    console.log(data);
-  } catch (e) {
-    console.log(e);
-  }
+  const res = await api.post("/api/chat", { content });
+  const data = await res.json();
+  return data;
 }
 
 async function getHistory() {
-  try {
-    const res = await api.get("/api/chat/history");
-    const data = await res.json();
-    console.log(data);
-  } catch (e) {
-    console.log(e);
-  }
+  const res = await api.get("/api/chat/history");
+  const data = await res.json();
+  return data;
 }
