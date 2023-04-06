@@ -13,7 +13,7 @@ var API = (function () {
     },
   };
   const api = {
-    async get(url, config = {}) {
+    async get(url, { headers, ...config } = {}) {
       const defaultConfig = {
         method: "GET",
         headers: {
@@ -69,7 +69,7 @@ var API = (function () {
   function loginOut() {
     token.clearToken();
   }
-  
+
   return {
     reg,
     login,
