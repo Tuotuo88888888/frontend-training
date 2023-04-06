@@ -2,8 +2,8 @@ const loginIdValidator = new FieldValidator("txtLoginId", async function (val) {
   if (!val) {
     return "请填写账号";
   }
-  const exists = await API.exists(val);
-  if (!exists.data) {
+  const resp = await API.exists(val);
+  if (resp.data) {
     return "该账号已被占用，请重新选择一个账号名";
   }
 });
@@ -41,9 +41,14 @@ userform.addEventListener("submit", async function (e) {
     loginPwdValidator,
     loginPwdConfirmValidator
   );
-  if (result) {
-    const formData = new FormData(userform);
-
-    API.reg({});
+  if (!result) {
+    return;
+  }
+  const formData = new FormData(userform);
+  const data = Object.fromEntries(formData.entries());
+  const resp = await API.reg(data);
+  if (resp.code === 0) {
+    alert("注册成功，点击确定，跳转到登录页");
+    location.href = "./login.html";
   }
 });
