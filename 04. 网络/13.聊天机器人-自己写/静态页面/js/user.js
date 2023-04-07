@@ -1,6 +1,3 @@
-function $(selector) {
-  return document.querySelector(selector);
-}
 class FieldValidator {
   /**
    * Creates an instance of FieldValidator.
