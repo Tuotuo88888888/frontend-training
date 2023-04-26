@@ -11,8 +11,21 @@ function init() {
   const aud = $("<audio>")
     .prop({ src: audioUrl, autoplay: true, loop: true })
     .appendTo(container);
-  $(document).on("click", () => {
-    aud[0].play();
+  // $(document).one("click", () => {
+  //   aud[0].play();
+  // });
+  $("<h1>").text("豆瓣电影").appendTo(container);
+
+  $(window).on("scroll", () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const vHeight = document.documentElement.clientHeight;
+    if (scrollTop >= vHeight) {
+      vid[0].pause();
+      aud[0].pause();
+    } else {
+      vid[0].play();
+      aud[0].play();
+    }
   });
 }
 init();
