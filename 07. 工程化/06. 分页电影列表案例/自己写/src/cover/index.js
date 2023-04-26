@@ -5,14 +5,14 @@ import audioUrl from "../assets/music.mp3";
 
 function init() {
   const container = $("<div>").addClass(styled.container).appendTo("#app");
-  $("<video>")
+  const vid = $("<video>")
     .prop({ src: videoUrl, autoplay: true, loop: true, muted: true })
     .appendTo(container);
-  const audioElement = $("<audio>")
+  const aud = $("<audio>")
     .prop({ src: audioUrl, autoplay: true, loop: true })
-    .appendTo(container)[0];
+    .appendTo(container);
   $(document).on("click", () => {
-    audioElement.play();
+    aud[0].play();
   });
 }
 init();
