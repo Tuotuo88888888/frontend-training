@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="captcha"></canvas>
+    <script>
+      function generateCaptcha() {
+        // 获取Canvas元素
+        const canvas = document.getElementById("captcha");
+        const ctx = canvas.getContext("2d");
+
+        // 清除整个Canvas元素
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 设置Canvas的宽度和高度、字符数量、字体大小
+        canvas.width = 100;
+        canvas.height = 30;
+        const charNum = 4;
+        const fontSize = 22;
+        const charWidth = canvas.width / charNum;
+
+        // 绘制随机背景
+        const bgColor = getRandomColor();
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // 绘制随机字符
+        const code = Array(charNum)
+          .fill(0)
+          .map((_, i) => {
+            const charCode = generateRandomCode();
+            ctx.font = getRandomFont(fontSize);
+            const fontColor = getRandomColor();
+            ctx.fillStyle = fontColor;
+            const x = charWidth * i + charWidth / 2;
+            const y = canvas.height / 2;
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(charCode, x, y);
+            return charCode;
+          })
+          .join("");
+
+        // 绘制随机颗粒
+        //   for (let i = 0; i < 200; i++) {
+        //     const particleColor = getRandomColor();
+        //     const particleSize = Math.random() * 3;
+        //     const x = Math.random() * canvas.width;
+        //     const y = Math.random() * canvas.height;
+        //     ctx.fillStyle = particleColor;
+        //     ctx.beginPath();
+        //     ctx.arc(x, y, particleSize, 0, Math.PI * 2);
+        //     ctx.fill();
+        //   }
+
+        // 将验证码保存到全局变量中，以便稍后进行比较
+        window.captchaCode = code;
+      }
+      generateCaptcha();
+
+      // 生成随机颜色
+      function getRandomColor() {
+        const letters = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * letters.length)];
+        }
+        return color;
+      }
+
+      // 生成随机字体
+      function getRandomFont(fontSize = 22) {
+        const fonts = [
+          "serif",
+          "sans-serif",
+          "monospace",
+          "cursive",
+          "fantasy",
+        ];
+        return `${fontSize}px ${
+          fonts[Math.floor(Math.random() * fonts.length)]
+        }`;
+      }
+
+      // 生成随机验证码
+      function generateRandomCode() {
+        const letters =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let code = letters.charAt(Math.floor(Math.random() * letters.length));
+        return code;
+      }
+    </script>
+  </body>
+</html>
