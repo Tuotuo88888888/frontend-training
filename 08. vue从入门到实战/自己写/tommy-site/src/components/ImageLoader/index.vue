@@ -1,9 +1,22 @@
 <template>
-  <img :src="src" alt="" class="image-loader-container" />
+  <div class="image-loader-container">
+    <img :src="src" @load="imgLoad" class="img" />
+    <img
+      :src="placeholder"
+      class="filter"
+      :class="{ hidden: filterHidden }"
+      :style="{ transition: duration + 'ms' }"
+    />
+  </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      filterHidden: false,
+    };
+  },
   props: {
     src: {
       type: String,
@@ -17,14 +30,35 @@ export default {
       type: Number,
       default: 500,
     },
+    load: {
+      type: Function,
+    },
+  },
+  methods: {
+    imgLoad() {
+      this.filterHidden = true;
+      this.load?.();
+    },
   },
 };
 </script>
 
 <style lang="less" scoped>
+@import url("~@/styles/mixin.less");
 .image-loader-container {
-  width: 400px;
-  height: 280px;
-  object-fit: cover;
+  width: max-content;
+  height: max-content;
+  position: relative;
+  overflow: hidden;
+  img {
+    object-fit: cover;
+  }
+
+  .filter {
+    .self-fill();
+    &.hidden {
+      opacity: 0;
+    }
+  }
 }
 </style>
