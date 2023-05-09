@@ -1,25 +1,24 @@
 <template>
   <div class="test-container">
-    <Empty />
+    <SiteAside />
   </div>
 </template>
 
 <script>
-import Empty from "./";
-
+import SiteAside from "./";
+import "@/styles/global.less";
 export default {
   components: {
-    Empty,
+    SiteAside,
   },
 };
 </script>
 
-<style lang="less" scoped>
+<style>
 .test-container {
-  width: 500px;
-  height: 400px;
+  width: 250px;
+  height: 600px;
   border: 2px solid;
   margin: 0 auto;
-  position: relative;
 }
 </style>

@@ -23,6 +23,7 @@ export default {
 
 <style scoped>
 .avatar-container {
+  display: block;
   border-radius: 50%;
   object-fit: cover;
 }

@@ -22,19 +22,13 @@ export default {
 
 <style lang="less" scoped>
 @import url("~@/styles/var.less");
+@import url("~@/styles/mixin.less");
 .empty-container {
-  width: 150px;
-  height: 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  p {
-    color: @lightWords;
+  .self-center();
+  color: @gray;
+  text-align: center;
+  .icon-container {
+    font-size: 72px;
   }
-}
-.icon-container {
-  font-size: 120px;
-  color: @lightWords;
 }
 </style>

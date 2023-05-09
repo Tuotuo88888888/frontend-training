@@ -1,11 +1,12 @@
 <template>
   <div class="image-loader-container">
-    <img :src="src" @load="imgLoad" class="img" />
+    <img v-if="!everythingDone" class="placeholder" :src="placeholder" alt="" />
     <img
-      :src="placeholder"
-      class="filter"
-      :class="{ hidden: filterHidden }"
-      :style="{ transition: duration + 'ms' }"
+      class="origin"
+      :src="src"
+      @load="handleLoad"
+      alt=""
+      :style="{ opacity: originOpacity, transition: `${duration}ms` }"
     />
   </div>
 </template>
@@ -14,7 +15,8 @@
 export default {
   data() {
     return {
-      filterHidden: false,
+      originLoaded: false,
+      everythingDone: false,
     };
   },
   props: {
@@ -30,14 +32,19 @@ export default {
       type: Number,
       default: 500,
     },
-    load: {
-      type: Function,
+  },
+  computed: {
+    originOpacity() {
+      return this.originLoaded ? 1 : 0;
     },
   },
   methods: {
-    imgLoad() {
-      this.filterHidden = true;
-      this.load?.();
+    handleLoad() {
+      this.originLoaded = true;
+      setTimeout(() => {
+        this.everythingDone = true;
+        this.$emit("load");
+      }, this.duration);
     },
   },
 };
@@ -46,19 +53,16 @@ export default {
 <style lang="less" scoped>
 @import url("~@/styles/mixin.less");
 .image-loader-container {
-  width: max-content;
-  height: max-content;
+  width: 100%;
+  height: 100%;
   position: relative;
   overflow: hidden;
   img {
+    .self-fill();
     object-fit: cover;
   }
-
-  .filter {
-    .self-fill();
-    &.hidden {
-      opacity: 0;
-    }
+  .placeholder {
+    filter: blur(2vw);
   }
 }
 </style>
