@@ -1,33 +1,36 @@
 <template>
-  <div id="app">
-    <Pager
-      :total="200"
-      :current="current"
-      :visibleNumber="4"
-      @pageChange="pageChange"
-    />
+  <div class="app-container">
+    <Layout>
+      <template #left>
+        <div class="aside">
+          <SiteAside />
+        </div>
+      </template>
+      <template #default> <RouterView /> </template>
+    </Layout>
   </div>
 </template>
 
 <script>
-import Pager from "./components/Pager.vue";
+import Layout from "./components/Layout";
+import SiteAside from "./components/SiteAside";
 
 export default {
   name: "App",
   components: {
-    Pager,
-  },
-  data() {
-    return { current: 1 };
-  },
-  methods: {
-    pageChange(newPage) {
-      console.log("切换页面");
-      this.current = newPage;
-    },
+    Layout,
+    SiteAside,
   },
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+@import "~@/styles/mixin.less";
+.app-container {
+  .self-fill(fixed);
+  .aside {
+    width: 250px;
+    height: 100%;
+  }
+}
 </style>
