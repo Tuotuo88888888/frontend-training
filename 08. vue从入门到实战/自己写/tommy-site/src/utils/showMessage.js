@@ -9,20 +9,23 @@ import styles from "./showMessage.module.less";
  * @param {Number} duration 多久后消失
  * @param {HTMLElement} container 容器，消息会显示到该容器的正中；如果不传，则显示到页面正中
  */
-export default function ({
-  content = "",
-  type = "info",
-  duration = 2000,
-  container = document.body,
-  callback,
-} = {}) {
+export default function (options = {}) {
+  const {
+    content = "",
+    type = "info",
+    duration = 2000,
+    container = document.body,
+    callback,
+  } = options;
   const div = document.createElement("div");
   const iconDom = getComponentRootDom(Icon, { type });
   container.appendChild(div);
   div.innerHTML = `<span class=${styles.icon}>${iconDom.outerHTML}</span><div>${content}</div>`;
   div.classList.add(...[styles.message, styles[`message-${type}`]]);
-  if (getComputedStyle(container).position === "static") {
-    container.style.position = "relative";
+  if (options.container) {
+    if (getComputedStyle(container).position === "static") {
+      container.style.position = "relative";
+    }
   }
   div.clientWidth;
 
