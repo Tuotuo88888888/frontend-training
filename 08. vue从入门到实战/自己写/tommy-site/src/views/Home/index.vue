@@ -1,13 +1,14 @@
 <template>
-  <div class="home-container" ref="container">
+  <div class="home-container" ref="container" @wheel="handleWheel">
     <ul
       class="carousel-container"
       :style="{
         marginTop,
       }"
+      @transitionend="handleTransitionEnd"
     >
       <li v-for="item in banners" :key="item.id">
-        <Carouselitem />
+        <Carouselitem v-if="item.isLoad" :carousel="item" />
       </li>
     </ul>
     <div v-show="index > 0" @click="switchTo(index - 1)" class="icon icon-up">
@@ -45,11 +46,31 @@ export default {
       banners: [],
       index: 0,
       containerHeight: 0,
+      switching: false,
     };
   },
   methods: {
     switchTo(i) {
       this.index = i;
+      this.banners[i].isLoad = true;
+    },
+    handleWheel(e) {
+      if (this.switching) {
+        return;
+      }
+      if (e.deltaY < -5 && this.index > 0) {
+        this.switching = true;
+        this.switchTo(this.index - 1);
+      } else if (e.deltaY > 5 && this.index < this.banners.length - 1) {
+        this.switching = true;
+        this.switchTo(this.index + 1);
+      }
+    },
+    handleTransitionEnd() {
+      this.switching = false;
+    },
+    handleResize() {
+      this.containerHeight = this.$refs.container.clientHeight;
     },
   },
   computed: {
@@ -58,10 +79,15 @@ export default {
     },
   },
   async created() {
-    this.banners = await getBanners();
+    this.banners = (await getBanners()).map((i) => ({ ...i, isLoad: false }));
+    this.banners[0].isLoad = true;
   },
   mounted() {
     this.containerHeight = this.$refs.container.clientHeight;
+    window.addEventListener("resize", this.handleResize);
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.handleResize);
   },
 };
 </script>
