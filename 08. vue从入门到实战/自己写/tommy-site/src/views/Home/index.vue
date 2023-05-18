@@ -80,7 +80,7 @@ export default {
   },
   async created() {
     this.banners = (await getBanners()).map((i) => ({ ...i, isLoad: false }));
-    this.banners[0].isLoad = true;
+    this.banners[this.index].isLoad = true;
   },
   mounted() {
     this.containerHeight = this.$refs.container.clientHeight;
