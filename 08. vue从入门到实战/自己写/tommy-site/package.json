@@ -13,13 +13,14 @@
     "test:Contact": "vue serve ./src/components/SiteAside/Contact/test.vue",
     "test:Menu": "vue serve ./src/components/SiteAside/Menu/test.vue",
     "test:SiteAside": "vue serve ./src/components/SiteAside/test.vue",
-    "test:Layout": "vue serve ./src/components/Layout/test.vue"
+    "test:Layout": "vue serve ./src/components/Layout/test.vue",
+    "test:Loading": "vue serve ./src/components/Loading/test.vue"
   },
   "dependencies": {
     "axios": "^1.4.0",
     "core-js": "^3.6.5",
     "mockjs": "^1.1.0",
-    "vue": "^2.6.11",
+    "vue": "^2.7.14",
     "vue-router": "^3.4.9"
   },
   "devDependencies": {
