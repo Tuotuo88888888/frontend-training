@@ -18,10 +18,10 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
-    "core-js": "^3.6.5",
+    "core-js": "^3.30.2",
     "mockjs": "^1.1.0",
-    "vue": "^2.7.14",
-    "vue-router": "^3.4.9"
+    "vue": "^2.6.11",
+    "vue-router": "^3.6.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.8",
