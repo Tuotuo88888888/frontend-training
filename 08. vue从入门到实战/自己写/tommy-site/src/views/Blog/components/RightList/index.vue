@@ -7,8 +7,12 @@
       @click="handleClick(item)"
     >
       <span>{{ item.name }}</span>
+      <RightList
+        v-if="item.children"
+        :list="item.children"
+        @select="handleClick"
+      />
     </li>
-    <RightList :list="item.children" @select="handleClick" />
   </ul>
 </template>
 
@@ -30,6 +34,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import url("~@/styles/var.less");
 .right-list-container {
   list-style: none;
   padding: 0;
@@ -37,8 +42,13 @@ export default {
     margin-left: 1em;
   }
   li {
-    height: 40px;
+    min-height: 40px;
     line-height: 40px;
+    cursor: pointer;
+    &.active > span {
+      color: @warn;
+      font-weight: bold;
+    }
   }
 }
 </style>

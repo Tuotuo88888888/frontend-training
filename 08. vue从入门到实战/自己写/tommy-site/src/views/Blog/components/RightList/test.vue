@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import RightList from "./RightList";
+import RightList from "./";
 export default {
   components: {
     RightList,
