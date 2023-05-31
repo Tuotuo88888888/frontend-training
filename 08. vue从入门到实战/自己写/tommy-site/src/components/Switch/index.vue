@@ -24,6 +24,7 @@ export default {
 
 <style scoped>
 .switch-container {
+  cursor: pointer;
   width: 50px;
   height: 25px;
   border-radius: 25px;
@@ -40,7 +41,6 @@ export default {
   height: 20px;
   border-radius: 50%;
   background: white;
-  display: block;
   position: absolute;
   top: 50%;
   left: 2px;
