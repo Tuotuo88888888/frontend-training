@@ -1,5 +1,10 @@
 <template>
-  <div class="home-container" ref="container" @wheel="handleWheel">
+  <div
+    class="home-container"
+    ref="container"
+    @wheel="handleWheel"
+    v-loading="isLoading"
+  >
     <ul
       class="carousel-container"
       :style="{
@@ -7,7 +12,7 @@
       }"
       @transitionend="handleTransitionEnd"
     >
-      <li v-for="item in banners" :key="item.id">
+      <li v-for="item in data" :key="item.id">
         <Carouselitem v-if="item.isLoad" :carousel="item" />
       </li>
     </ul>
@@ -15,7 +20,7 @@
       <Icon type="arrowUp" />
     </div>
     <div
-      v-show="index < banners.length - 1"
+      v-show="index < data.length - 1"
       @click="switchTo(index + 1)"
       class="icon icon-down"
     >
@@ -24,7 +29,7 @@
     <ul class="indicator">
       <li
         :class="{ active: i === index }"
-        v-for="(item, i) in banners"
+        v-for="(item, i) in data"
         :key="item.id"
         @click="switchTo(i)"
       ></li>
@@ -36,14 +41,15 @@
 import Icon from "./../../components/Icon";
 import Carouselitem from "./Carouselitem.vue";
 import { getBanners } from "./../../api/banner";
+import fetchData from "../../mixins/fetchData";
 export default {
+  mixins: [fetchData([])],
   components: {
     Icon,
     Carouselitem,
   },
   data() {
     return {
-      banners: [],
       index: 0,
       containerHeight: 0,
       switching: false,
@@ -52,7 +58,7 @@ export default {
   methods: {
     switchTo(i) {
       this.index = i;
-      this.banners[i].isLoad = true;
+      this.data[i].isLoad = true;
     },
     handleWheel(e) {
       if (this.switching) {
@@ -61,7 +67,7 @@ export default {
       if (e.deltaY < -5 && this.index > 0) {
         this.switching = true;
         this.switchTo(this.index - 1);
-      } else if (e.deltaY > 5 && this.index < this.banners.length - 1) {
+      } else if (e.deltaY > 5 && this.index < this.data.length - 1) {
         this.switching = true;
         this.switchTo(this.index + 1);
       }
@@ -72,15 +78,18 @@ export default {
     handleResize() {
       this.containerHeight = this.$refs.container.clientHeight;
     },
+    async fetchData() {
+      return await getBanners();
+    },
+    onceUpdateData(data) {
+      this.data = data.map((i) => ({ ...i, isLoad: false }));
+      this.data[this.index].isLoad = true;
+    },
   },
   computed: {
     marginTop() {
       return -this.index * this.containerHeight + "px";
     },
-  },
-  async created() {
-    this.banners = (await getBanners()).map((i) => ({ ...i, isLoad: false }));
-    this.banners[this.index].isLoad = true;
   },
   mounted() {
     this.containerHeight = this.$refs.container.clientHeight;
