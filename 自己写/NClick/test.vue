@@ -1,5 +1,5 @@
 <template>
-  <NClick @nclick="handleNClick" />
+  <NClick @nclick="handleNClick" :count="1" :content="666" />
 </template>
 
 <script>
