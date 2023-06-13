@@ -110,6 +110,7 @@ export default {
   height: 100%;
   color: #fff;
   position: relative;
+  overflow: hidden;
   .carousel-img {
     width: 110%;
     height: 110%;

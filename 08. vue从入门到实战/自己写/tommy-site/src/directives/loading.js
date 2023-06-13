@@ -1,7 +1,7 @@
 import loadingUrl from "@/assets/loading.svg";
 import styles from "./loading.module.less";
 function getLoadingImage(el) {
-  return document.querySelector("img[data-role=loading]");
+  return el.querySelector("img[data-role=loading]");
 }
 function createLoadingImage() {
   const img = document.createElement("img");

@@ -4,9 +4,10 @@
       v-for="(item, i) in list"
       :key="i"
       :class="{ active: item.isSelect }"
-      @click="handleClick(item)"
+      @click.stop="handleClick(item)"
     >
       <span>{{ item.name }}</span>
+      <span v-if="item.aside" class="aside">{{ item.aside }}</span>
       <RightList
         v-if="item.children"
         :list="item.children"
@@ -48,6 +49,11 @@ export default {
     &.active > span {
       color: @warn;
       font-weight: bold;
+    }
+    .aside {
+      color: @gray;
+      font-size: 12px;
+      margin-left: 1em;
     }
   }
 }

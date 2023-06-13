@@ -20,6 +20,7 @@ Mock.mock(/^\/api\/blog(\?.+)?$/, "get", function (options) {
     limit = 10,
     categoryid = -1,
   } = qs.parse(options.url.split("?")?.[1]);
+  console.log(page, limit, categoryid);
   return Mock.mock({
     code: 0,
     msg: "",
@@ -28,7 +29,7 @@ Mock.mock(/^\/api\/blog(\?.+)?$/, "get", function (options) {
       [`rows|${limit}`]: [
         {
           id: "@guid",
-          title: "@ctitle",
+          title: "@ctitle(1,50)",
           description: "@cparagraph(1,10)",
           category: {
             "id|1-10": 0,
@@ -36,7 +37,10 @@ Mock.mock(/^\/api\/blog(\?.+)?$/, "get", function (options) {
           },
           "scanNumber|0-3000": 0,
           "commentNumber|0-300": 30,
-          thumb: Mock.Random.image("300x250", "#000", "#fff", "Random Image"),
+          "thumb|1": [
+            Mock.Random.image("300x250", "#000", "#fff", "Random Image"),
+            null,
+          ],
           createDate: `@date('T')`,
         },
       ],
