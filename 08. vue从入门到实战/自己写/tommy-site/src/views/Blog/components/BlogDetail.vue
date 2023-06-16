@@ -4,7 +4,7 @@
     <div class="aside">
       <span>日期: {{ formatDate(blog.createDate) }}</span>
       <span>浏览: {{ blog.scanNumber }}</span>
-      <a href="">评论: {{ blog.commentNumber }}</a>
+      <a href="#data-form-container">评论: {{ blog.commentNumber }}</a>
       <a href="">{{ blog.category.name }}</a>
     </div>
     <div v-html="blog.htmlContent" class="markdown-body"></div>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import formatDate from "@/utils/formatDate";
+import { formatDate } from "@/utils";
 import "highlight.js/styles/github.css";
 import "@/styles/markdown.css";
 export default {
