@@ -1,7 +1,7 @@
 const arr = [45, 7, 2, 4, 1, 57, 53];
 
-const result = arr.includes(22);
-console.log(result);
+// const result = arr.includes(22);
+// console.log(result);
 
 // const result = arr.filter(function (item) {
 //   return item >= 50;
@@ -25,7 +25,8 @@ console.log(result);
 //   // } else {
 //   //   return false;
 //   // }
-//   return item % 2 !== 0;
+//   //   return item % 2 !== 0;
+//   return item % 2;
 // });
 
 // console.log(newArr);

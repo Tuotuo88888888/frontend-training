@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span class="num">0</span>
+    <button data-status="static">开始</button>
+    <script>
+      const btn = document.querySelector("button");
+      const num = document.querySelector(".num");
+      btn.onclick = function () {
+        this.dataset.status =
+          this.dataset.status === "static"
+            ? ((this.innerText = "停止"), "active")
+            : ((this.innerText = "开始"), "static");
+        changeOnce();
+      };
+      function changeOnce() {
+        requestAnimationFrame(function (e) {
+          console.log(e);
+          if (btn.dataset.status === "static") {
+            return;
+          }
+          num.innerText -= -1;
+          changeOnce(); // 改变完成后，继续注册下一针的变化
+        });
+      }
+      changeOnce();
+    </script>
+  </body>
+</html>

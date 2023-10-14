@@ -64,11 +64,11 @@ html {
 .info .title .position {
   font-size: 0.45em;
   letter-spacing: 4px;
-  display: inline-block;
+  /* display: inline-block; */
 }
 .info .item {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  /* grid-template-columns: 1fr 3fr; */
   gap: 10px;
 }
 .info .item .label {

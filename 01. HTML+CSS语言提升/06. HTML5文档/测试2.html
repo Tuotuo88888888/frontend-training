@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #some-element-you-want-to-animate {
+        width: 20px;
+        height: 20px;
+        background-color: #f00;
+        border-radius: 50%;
+        transition: 0.5s;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="some-element-you-want-to-animate"></div>
+    <script>
+      const element = document.getElementById(
+        "some-element-you-want-to-animate"
+      );
+      let start, previousTimeStamp;
+      let done = false;
+
+      function step(timestamp) {
+        // console.log(timestamp);
+        if (start === undefined) {
+          start = timestamp;
+        }
+        const elapsed = timestamp - start;
+
+        if (previousTimeStamp !== timestamp) {
+          // 这里使用 Math.min() 确保元素在恰好位于 200px 时停止运动
+          const count = Math.min(0.1 * elapsed, 200);
+          element.style.transform = `translateX(${count}px)`;
+          if (count === 200) done = true;
+        }
+        //  else {
+        //   console.log(previousTimeStamp, timestamp);
+        // }
+
+        if (elapsed < 2000) {
+          // 2 秒之后停止动画
+          previousTimeStamp = timestamp;
+          //   console.log("pts:" + previousTimeStamp);
+          if (!done) {
+            window.requestAnimationFrame(step);
+          }
+        }
+      }
+
+      window.requestAnimationFrame(step);
+    </script>
+  </body>
+</html>
