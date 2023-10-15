@@ -25,13 +25,13 @@ function fetchStudents(page) {
 
 const proms = new Array(10).fill(1).map((it, i) => fetchStudents(i + 1));
 
-// Promise.all(proms)
-//   .then((result) => {
-//     console.log(result.flat());
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
+Promise.all(proms)
+  .then((result) => {
+    console.log(result.flat());
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 // 获取1-10页的学生，最终按照页码的顺序合并成一个数组，如果某些页码的数据获取失败，就不加入该数据即可
 // Promise.allSettled(proms).then((result) => {
@@ -52,11 +52,11 @@ const proms = new Array(10).fill(1).map((it, i) => fetchStudents(i + 1));
 //   });
 
 // 获取1-10页的学生，输出最先得到的结果（有结果输出结果，有错误输出错误）
-Promise.race(proms).then(
-  (result) => {
-    console.log(result);
-  },
-  (err) => {
-    console.log(err);
-  }
-);
+// Promise.race(proms).then(
+//   (result) => {
+//     console.log(result);
+//   },
+//   (err) => {
+//     console.log(err);
+//   }
+// );
