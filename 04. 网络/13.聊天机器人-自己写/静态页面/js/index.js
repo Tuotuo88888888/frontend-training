@@ -37,12 +37,6 @@
     scrollBottom();
   }
 
-  // 发送消息事件
-  doms.msgContainer.onsubmit = function (e) {
-    e.preventDefault();
-    sendChat();
-  };
-
   async function sendChat() {
     const content = doms.txtMsg.value.trim();
     if (!content) {
