@@ -14,21 +14,22 @@
     <script>
       // 创建一个vue实例
       var vm = new Vue({
+        el:"#app",
         data: {
           title: "Hello World",
           author: "袁",
         },
         template: `<div>
-          <h1>第一个vue应用：{{title}}</h1>
+          <h1>template,第一个vue应用：{{title}}</h1>
           <p>作者：{{author}}</p>
         </div>`,
-        // render(h) {
-        //   console.log("render");
-        //   return h("div", [
-        //     h("h1", `第一个vue应用：${this.title}`),
-        //     h("p", `作者：${this.author}`),
-        //   ]);
-        // },
+        render(h) {
+          console.log("render");
+          return h("div", [
+            h("h1", `render,第一个vue应用：${this.title}`),
+            h("p", `作者：${this.author}`),
+          ]);
+        },
       });
     </script>
   </body>
