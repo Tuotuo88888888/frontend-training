@@ -19,7 +19,7 @@ import BlogTOC from "./components/BlogTOC";
 import BlogComment from "./components/BlogComment";
 import { getBlog } from "@/api/blog";
 import fetchData from "@/mixins/fetchData";
-import { h } from "vue";
+import mainScroll from "@/mixins/mainScroll";
 export default {
   components: {
     Layout,
@@ -27,20 +27,11 @@ export default {
     BlogTOC,
     BlogComment,
   },
-  mixins: [fetchData(null)],
+  mixins: [fetchData(null), mainScroll("mainContainer")],
   methods: {
     async fetchData() {
       return await getBlog(this.$route.params.id);
     },
-    handleScroll() {
-      this.$bus.$emit("mainScroll", this.$refs.mainContainer);
-    },
-  },
-  mounted() {
-    this.$refs.mainContainer.addEventListener("scroll", this.handleScroll);
-  },
-  destroyed() {
-    this.$refs.mainContainer.removeEventListener("scroll", this.handleScroll);
   },
   updated() {
     const hash = location.hash;

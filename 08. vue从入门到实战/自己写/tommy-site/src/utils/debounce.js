@@ -1,4 +1,4 @@
-export default function debounce(fn, duration = 1000) {
+export default function (fn, duration = 1000) {
   let timer = null;
   return function (...args) {
     const that = this;
