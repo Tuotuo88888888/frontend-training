@@ -3,6 +3,8 @@
     <div id="nav">
       <router-link to="/">Home</router-link>
       |
+      <router-link to="/news">News</router-link>
+      |
       <user-name />
     </div>
     <router-view />
@@ -10,7 +12,7 @@
 </template>
 
 <script>
-import UserName from './component/UserName';
+import UserName from "./component/UserName";
 export default {
   components: {
     UserName,

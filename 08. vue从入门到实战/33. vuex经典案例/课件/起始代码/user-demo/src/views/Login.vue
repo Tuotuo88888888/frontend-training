@@ -11,23 +11,35 @@
     <div class="form-item">
       <label></label>
       <button :disabled="loading">
-        {{ loading ? 'loading...' : '登录' }}
+        {{ loading ? "loading..." : "登录" }}
       </button>
     </div>
   </form>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      loginId: '',
-      loginPwd: '',
-      loading: false,
+      loginId: "",
+      loginPwd: "",
     };
   },
+  computed: {
+    ...mapState("loginUser", ["loading"]),
+  },
   methods: {
-    handleSubmit() {
-      console.log('登录', this.loginId, this.loginPwd);
+    async handleSubmit() {
+      const resp = await this.$store.dispatch("loginUser/asyncLogin", {
+        loginId: this.loginId,
+        loginPwd: this.loginPwd,
+      });
+      if (resp) {
+        alert("登录成功");
+        this.$router.push(this.$route.query.redirect ?? "/");
+      } else {
+        alert("账号或密码错误");
+      }
     },
   },
 };
