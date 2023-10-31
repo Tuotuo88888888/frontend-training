@@ -12,6 +12,9 @@ function createLoadingImage() {
 }
 export default function (el, binding) {
   const curImg = getLoadingImage(el);
+  if (binding.arg) {
+    el.style.position = binding.arg;
+  }
   if (binding.value) {
     if (!curImg) {
       const img = createLoadingImage();

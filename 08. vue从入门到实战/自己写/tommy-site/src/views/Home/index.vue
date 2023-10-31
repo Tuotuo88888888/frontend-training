@@ -3,7 +3,7 @@
     class="home-container"
     ref="container"
     @wheel="handleWheel"
-    v-loading="isLoading"
+    v-loading="loading"
   >
     <ul
       class="carousel-container"
@@ -41,13 +41,24 @@
 import Icon from "./../../components/Icon";
 import Carouselitem from "./Carouselitem.vue";
 import { getBanners } from "./../../api/banner";
-import fetchData from "../../mixins/fetchData";
+import { mapState } from "vuex";
 export default {
-  mixins: [fetchData([])],
   components: {
     Icon,
     Carouselitem,
   },
+  created() {
+    this.$store
+      .dispatch("banner/fetchBanners")
+      .then(() => this.setCurrentItemLoad());
+  },
+  computed: {
+    marginTop() {
+      return -this.index * this.containerHeight + "px";
+    },
+    ...mapState("banner", ["loading", "data"]),
+  },
+
   data() {
     return {
       index: 0,
@@ -56,9 +67,13 @@ export default {
     };
   },
   methods: {
+    setCurrentItemLoad() {
+      this.$store.commit("banner/setDataItemLoadStatus", this.index);
+    },
     switchTo(i) {
       this.index = i;
-      this.data[i].isLoad = true;
+      // this.data[i].isLoad = true;
+      this.setCurrentItemLoad();
     },
     handleWheel(e) {
       if (this.switching) {
@@ -81,15 +96,10 @@ export default {
     async fetchData() {
       return await getBanners();
     },
-    onceUpdateData(data) {
-      this.data = data.map((i) => ({ ...i, isLoad: false }));
-      this.data[this.index].isLoad = true;
-    },
-  },
-  computed: {
-    marginTop() {
-      return -this.index * this.containerHeight + "px";
-    },
+    // onceUpdateData(data) {
+    //   this.data = data.map((i) => ({ ...i, isLoad: false }));
+    //   this.data[this.index].isLoad = true;
+    // },
   },
   mounted() {
     this.containerHeight = this.$refs.container.clientHeight;
@@ -97,6 +107,7 @@ export default {
   },
   destroyed() {
     window.removeEventListener("resize", this.handleResize);
+    this.$store.commit("banner/setDataAllUnLoadStatus");
   },
 };
 </script>
