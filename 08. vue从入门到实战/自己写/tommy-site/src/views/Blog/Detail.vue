@@ -20,6 +20,7 @@ import BlogComment from "./components/BlogComment";
 import { getBlog } from "@/api/blog";
 import fetchData from "@/mixins/fetchData";
 import mainScroll from "@/mixins/mainScroll";
+import { titleController } from "@/utils";
 export default {
   components: {
     Layout,
@@ -30,7 +31,11 @@ export default {
   mixins: [fetchData(null), mainScroll("mainContainer")],
   methods: {
     async fetchData() {
-      return await getBlog(this.$route.params.id);
+      const resp = await getBlog(this.$route.params.id);
+      if (resp.title) {
+        titleController.setRouteTitle(resp.title);
+      }
+      return resp;
     },
   },
   updated() {
