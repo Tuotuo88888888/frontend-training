@@ -3,7 +3,9 @@ import VueRouter from "vue-router";
 import routes from "./routes";
 import { titleController } from "../utils";
 
-Vue.use(VueRouter);
+if (!window.VueRouter) {
+  Vue.use(VueRouter);
+}
 
 const router = new VueRouter({
   routes,

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --modern",
     "test:Pager": "vue serve ./src/components/Pager/test.vue",
     "test:Avatar": "vue serve ./src/components/Avatar/test.vue",
     "test:Icon": "vue serve ./src/components/Icon/test.vue",
@@ -25,7 +25,8 @@
     "querystring": "^0.2.1",
     "vue": "^2.6.11",
     "vue-router": "^3.6.5",
-    "vuex": "^3.6.2"
+    "vuex": "^3.6.2",
+    "webpack-bundle-analyzer": "^4.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
