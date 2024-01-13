@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="buttonClick()">点击</button>
+    <script>
+      function delay(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+      async function fetchApi() {
+        await delay(1000);
+        const round = Math.random();
+        if (round > 0.5) {
+          return Promise.reject("出错了");
+        }
+        return "成功了";
+      }
+      async function buttonClick() {
+        try {
+          const resp = await fetchApi();
+          console.log(resp);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    </script>
+  </body>
+</html>
