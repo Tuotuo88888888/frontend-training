@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css" />
+    <script src="./js/index.js" defer></script>
+  </head>
+  <body>
+    <div class="operation">
+      <label>横<input type="number" name="row" id="row" value="10" /></label>
+      <label>竖<input type="number" name="col" id="col" value="10" /></label>
+      <label>雷<input type="number" name="mine" id="mine" value="10" /></label>
+      <button type="button" id="enter">确定</button>
+    </div>
+    <div class="container">
+      <div class="line">
+        <div class="cell mine"></div>
+        <div class="cell mine click"></div>
+        <div class="cell high-risk number-6"></div>
+        <div class="cell medium-risk number-3"></div>
+        <div class="cell low-risk number-1"></div>
+      </div>
+      <div class="line">
+        <div class="cell unknown"></div>
+        <div class="cell unknown flag"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+      <div class="line">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+      <div class="line">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+      <div class="line">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+    </div>
+  </body>
+</html>
