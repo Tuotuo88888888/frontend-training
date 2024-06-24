@@ -7,4 +7,7 @@ module.exports = {
     },
   },
   configureWebpack: require("./webpack.config"),
+  css: {
+    extract: true,
+  },
 };

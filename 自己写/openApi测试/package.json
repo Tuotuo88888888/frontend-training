@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "openapi": "node ./script/openapi.js"
+  },
+  "devDependencies": {
+    "@umijs/openapi": "^1.11.1"
+  }
+}
